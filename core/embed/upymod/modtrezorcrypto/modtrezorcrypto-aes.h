@@ -18,9 +18,14 @@
  */
 
 #include "py/objstr.h"
+#include "py/qstr.h"
 
 #include "aes/aes.h"
 #include "memzero.h"
+#include <string.h>
+
+// 确保 QSTR 定义被包含
+#include "qstrdefs.h"
 
 enum AESMode {
   ECB = 0x00,
@@ -158,7 +163,7 @@ static mp_obj_t aes_update(mp_obj_t self, mp_obj_t data, bool encrypt) {
                     aes_ctr_cbuf_inc, &(o->encrypt_ctx));
       break;
   }
-  return mp_obj_new_str_from_vstr(&mp_type_bytes, &vstr);
+  return mp_obj_new_str_from_vstr( &vstr);
 }
 
 /// def encrypt(self, data: bytes) -> bytes:

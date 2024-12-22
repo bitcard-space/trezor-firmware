@@ -158,7 +158,7 @@ STATIC mp_obj_t mod_trezorcrypto_secp256k1_sign(size_t n_args,
     mp_raise_ValueError("Signing failed");
   }
   sig.buf[0] = 27 + pby + compressed * 4;
-  return mp_obj_new_str_from_vstr(&mp_type_bytes, &sig);
+  return mp_obj_new_str_from_vstr(&sig);
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(mod_trezorcrypto_secp256k1_sign_obj,
                                            2, 4,

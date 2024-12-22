@@ -248,8 +248,8 @@ STATIC mp_obj_t mod_trezorcrypto_ed25519_cosi_commit() {
   ed25519_cosi_commit(*(ed25519_secret_key *)nonce.buf,
                       *(ed25519_public_key *)commitment.buf);
   mp_obj_tuple_t *tuple = MP_OBJ_TO_PTR(mp_obj_new_tuple(2, NULL));
-  tuple->items[0] = mp_obj_new_str_from_vstr(&mp_type_bytes, &nonce);
-  tuple->items[1] = mp_obj_new_str_from_vstr(&mp_type_bytes, &commitment);
+  tuple->items[0] = mp_obj_new_str_from_vstr(&nonce);
+  tuple->items[1] = mp_obj_new_str_from_vstr(&commitment);
   return MP_OBJ_FROM_PTR(tuple);
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_0(mod_trezorcrypto_ed25519_cosi_commit_obj,
