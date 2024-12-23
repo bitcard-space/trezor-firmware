@@ -20,6 +20,36 @@ static void wrapped_ui_wait_callback(uint32_t current, uint32_t total) {
 #include "modtrezorcrypto-blake256.h"
 #include "modtrezorcrypto-blake2b.h"
 #include "modtrezorcrypto-blake2s.h"
+// #include "modtrezorcrypto-chacha20poly1305.h"
+// #include "modtrezorcrypto-crc.h"
+// #include "modtrezorcrypto-curve25519.h"
+// #include "modtrezorcrypto-ed25519.h"
+// #if USE_THP
+// #include "modtrezorcrypto-elligator2.h"
+// #endif
+// #include "modtrezorcrypto-groestl.h"
+// #include "modtrezorcrypto-hmac.h"
+// #include "modtrezorcrypto-nist256p1.h"
+// #include "modtrezorcrypto-pbkdf2.h"
+// #include "modtrezorcrypto-random.h"
+// #include "modtrezorcrypto-ripemd160.h"
+// #include "modtrezorcrypto-secp256k1.h"
+// #include "modtrezorcrypto-sha1.h"
+// #include "modtrezorcrypto-sha256.h"
+// #include "modtrezorcrypto-sha3-256.h"
+// #include "modtrezorcrypto-sha3-512.h"
+// #include "modtrezorcrypto-sha512.h"
+// #include "modtrezorcrypto-shamir.h"
+// #include "modtrezorcrypto-slip39.h"
+// #ifdef USE_OPTIGA
+// #include "modtrezorcrypto-optiga.h"
+// #endif
+// #if !BITCOIN_ONLY
+// #include "modtrezorcrypto-cardano.h"
+// #include "modtrezorcrypto-monero.h"
+// #include "modtrezorcrypto-nem.h"
+// #endif
+
 
 // info()
 static mp_obj_t py_subsystem_info(void) {
