@@ -45,7 +45,8 @@ STATIC mp_obj_t mod_trezorcrypto_Blake256_make_new(const mp_obj_type_t *type,
                                                    size_t n_args, size_t n_kw,
                                                    const mp_obj_t *args) {
   mp_arg_check_num(n_args, n_kw, 0, 1, false);
-  mp_obj_Blake256_t *o = m_new_obj_with_finaliser(mp_obj_Blake256_t);
+  // mp_obj_Blake256_t *o = m_new_obj_with_finaliser(mp_obj_Blake256_t);
+  mp_obj_Blake256_t *o = ((mp_obj_Blake256_t *)(m_malloc_with_finaliser(sizeof(mp_obj_Blake256_t))));
   o->base.type = type;
   blake256_Init(&(o->ctx));
   // constructor called with bytes/str as first parameter
@@ -83,7 +84,7 @@ STATIC mp_obj_t mod_trezorcrypto_Blake256_digest(mp_obj_t self) {
   memcpy(&ctx, &(o->ctx), sizeof(BLAKE256_CTX));
   blake256_Final(&ctx, (uint8_t *)hash.buf);
   memzero(&ctx, sizeof(BLAKE256_CTX));
-  return mp_obj_new_str_from_vstr(&mp_type_bytes, &hash);
+  return mp_obj_new_str_from_vstr(&hash);
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_1(mod_trezorcrypto_Blake256_digest_obj,
                                  mod_trezorcrypto_Blake256_digest);
@@ -109,9 +110,17 @@ STATIC const mp_rom_map_elem_t mod_trezorcrypto_Blake256_locals_dict_table[] = {
 STATIC MP_DEFINE_CONST_DICT(mod_trezorcrypto_Blake256_locals_dict,
                             mod_trezorcrypto_Blake256_locals_dict_table);
 
-STATIC const mp_obj_type_t mod_trezorcrypto_Blake256_type = {
-    {&mp_type_type},
-    .name = MP_QSTR_Blake256,
-    .make_new = mod_trezorcrypto_Blake256_make_new,
-    .locals_dict = (void *)&mod_trezorcrypto_Blake256_locals_dict,
-};
+// STATIC const mp_obj_type_t mod_trezorcrypto_Blake256_type = {
+//     {&mp_type_type},
+//     .name = MP_QSTR_Blake256,
+//     .make_new = mod_trezorcrypto_Blake256_make_new,
+//     .locals_dict = (void *)&mod_trezorcrypto_Blake256_locals_dict,
+// };
+
+static MP_DEFINE_CONST_OBJ_TYPE(
+    mod_trezorcrypto_Blake256_type,
+    MP_QSTR_Blake256,
+    MP_TYPE_FLAG_NONE,
+    make_new, mod_trezorcrypto_Blake256_make_new,
+    locals_dict, &mod_trezorcrypto_Blake256_locals_dict
+    );

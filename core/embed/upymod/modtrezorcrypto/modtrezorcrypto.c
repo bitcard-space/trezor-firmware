@@ -17,6 +17,9 @@ static void wrapped_ui_wait_callback(uint32_t current, uint32_t total) {
 #include "modtrezorcrypto-bip340.h"
 #endif
 #include "modtrezorcrypto-bip39.h"
+#include "modtrezorcrypto-blake256.h"
+
+
 // info()
 static mp_obj_t py_subsystem_info(void) {
     return MP_OBJ_NEW_SMALL_INT(42);
