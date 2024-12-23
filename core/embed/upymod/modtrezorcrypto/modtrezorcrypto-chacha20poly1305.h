@@ -52,8 +52,9 @@ STATIC mp_obj_t mod_trezorcrypto_ChaCha20Poly1305_make_new(
   if (nonce.len != 12) {
     mp_raise_ValueError("Invalid length of nonce");
   }
-  mp_obj_ChaCha20Poly1305_t *o =
-      m_new_obj_with_finaliser(mp_obj_ChaCha20Poly1305_t);
+  // mp_obj_ChaCha20Poly1305_t *o = m_new_obj_with_finaliser(mp_obj_ChaCha20Poly1305_t);
+  mp_obj_ChaCha20Poly1305_t *o = ((mp_obj_ChaCha20Poly1305_t *)(m_malloc_with_finaliser(sizeof(mp_obj_ChaCha20Poly1305_t))));
+
   rfc7539_init(&(o->ctx), key.buf, nonce.buf);
   o->base.type = type;
   o->alen = 0;
@@ -158,9 +159,16 @@ STATIC MP_DEFINE_CONST_DICT(
     mod_trezorcrypto_ChaCha20Poly1305_locals_dict,
     mod_trezorcrypto_ChaCha20Poly1305_locals_dict_table);
 
-STATIC const mp_obj_type_t mod_trezorcrypto_ChaCha20Poly1305_type = {
-    {&mp_type_type},
-    .name = MP_QSTR_ChaCha20Poly1305,
-    .make_new = mod_trezorcrypto_ChaCha20Poly1305_make_new,
-    .locals_dict = (void *)&mod_trezorcrypto_ChaCha20Poly1305_locals_dict,
-};
+// STATIC const mp_obj_type_t mod_trezorcrypto_ChaCha20Poly1305_type = {
+//     {&mp_type_type},
+//     .name = MP_QSTR_ChaCha20Poly1305,
+//     .make_new = mod_trezorcrypto_ChaCha20Poly1305_make_new,
+//     .locals_dict = (void *)&mod_trezorcrypto_ChaCha20Poly1305_locals_dict,
+// };
+static MP_DEFINE_CONST_OBJ_TYPE(
+    mod_trezorcrypto_ChaCha20Poly1305_type,
+    MP_QSTR_ChaCha20Poly1305,
+    MP_TYPE_FLAG_NONE,
+    make_new, mod_trezorcrypto_ChaCha20Poly1305_make_new,
+    locals_dict, &mod_trezorcrypto_Blake256_locals_dict
+    );

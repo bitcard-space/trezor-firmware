@@ -20,7 +20,7 @@ static void wrapped_ui_wait_callback(uint32_t current, uint32_t total) {
 #include "modtrezorcrypto-blake256.h"
 #include "modtrezorcrypto-blake2b.h"
 #include "modtrezorcrypto-blake2s.h"
-// #include "modtrezorcrypto-chacha20poly1305.h"
+#include "modtrezorcrypto-chacha20poly1305.h"
 // #include "modtrezorcrypto-crc.h"
 // #include "modtrezorcrypto-curve25519.h"
 // #include "modtrezorcrypto-ed25519.h"
