@@ -2,8 +2,21 @@
 #include "py/runtime.h"
 // #include <trezor_rtl.h>
 
+static mp_obj_t ui_wait_callback = mp_const_none;
+
+static void wrapped_ui_wait_callback(uint32_t current, uint32_t total) {
+  if (mp_obj_is_callable(ui_wait_callback)) {
+    mp_call_function_2_protected(ui_wait_callback, mp_obj_new_int(current),
+                                 mp_obj_new_int(total));
+  }
+}
+
 #include "modtrezorcrypto-bech32.h"
 #include "modtrezorcrypto-bip32.h"
+#ifdef USE_SECP256K1_ZKP
+#include "modtrezorcrypto-bip340.h"
+#endif
+#include "modtrezorcrypto-bip39.h"
 // info()
 static mp_obj_t py_subsystem_info(void) {
     return MP_OBJ_NEW_SMALL_INT(42);
