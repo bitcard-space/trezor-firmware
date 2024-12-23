@@ -30,6 +30,6 @@ typedef struct _mp_obj_HDNode_t {
   HDNode hdnode;
 } mp_obj_HDNode_t;
 
-extern const mp_obj_type_t mod_trezorcrypto_HDNode_type;
+static const mp_obj_type_t mod_trezorcrypto_HDNode_type;
 
 #endif
