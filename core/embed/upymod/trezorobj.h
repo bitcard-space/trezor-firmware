@@ -92,7 +92,7 @@ static inline uint64_t trezor_obj_get_uint64(mp_const_obj_t obj) {
     if (self->mpz.neg != 0) {
       mp_raise_TypeError("value is negative");
     }
-    mpz_as_bytes(&self->mpz, MP_ENDIANNESS_BIG, sizeof(uint64_t), (byte *)&u);
+    mpz_as_bytes(&self->mpz, MP_ENDIANNESS_BIG, false, sizeof(uint64_t), (byte *)&u);
     return u;
   } else {
     mp_raise_TypeError("value is not int");
