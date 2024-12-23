@@ -65,7 +65,9 @@ STATIC mp_obj_t mod_trezorcrypto_Hmac_make_new(const mp_obj_type_t *type,
     key.buf = "";
   }
 
-  mp_obj_Hmac_t *o = m_new_obj_with_finaliser(mp_obj_Hmac_t);
+  // mp_obj_Hmac_t *o = m_new_obj_with_finaliser(mp_obj_Hmac_t);
+  mp_obj_Hmac_t *o = ((mp_obj_Hmac_t *)(m_malloc_with_finaliser(sizeof(mp_obj_Hmac_t))));
+
   o->base.type = type;
   o->hashtype = trezor_obj_get_uint(args[0]);
   if (o->hashtype == SHA256) {
@@ -152,9 +154,19 @@ STATIC const mp_rom_map_elem_t mod_trezorcrypto_Hmac_locals_dict_table[] = {
 STATIC MP_DEFINE_CONST_DICT(mod_trezorcrypto_Hmac_locals_dict,
                             mod_trezorcrypto_Hmac_locals_dict_table);
 
-STATIC const mp_obj_type_t mod_trezorcrypto_Hmac_type = {
-    {&mp_type_type},
-    .name = MP_QSTR_Hmac,
-    .make_new = mod_trezorcrypto_Hmac_make_new,
-    .locals_dict = (void *)&mod_trezorcrypto_Hmac_locals_dict,
-};
+// STATIC const mp_obj_type_t mod_trezorcrypto_Hmac_type = {
+//     {&mp_type_type},
+//     .name = MP_QSTR_Hmac,
+//     .make_new = mod_trezorcrypto_Hmac_make_new,
+//     .locals_dict = (void *)&mod_trezorcrypto_Hmac_locals_dict,
+// };
+// ... existing code ...
+
+static MP_DEFINE_CONST_OBJ_TYPE(
+    mod_trezorcrypto_Hmac_type,
+    MP_QSTR_Hmac,
+    MP_TYPE_FLAG_NONE,
+    make_new, mod_trezorcrypto_Hmac_make_new,
+    locals_dict, &mod_trezorcrypto_Hmac_locals_dict
+);
+
