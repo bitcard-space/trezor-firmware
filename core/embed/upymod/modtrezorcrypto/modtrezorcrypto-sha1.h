@@ -45,7 +45,7 @@ STATIC mp_obj_t mod_trezorcrypto_Sha1_make_new(const mp_obj_type_t *type,
                                                size_t n_args, size_t n_kw,
                                                const mp_obj_t *args) {
   mp_arg_check_num(n_args, n_kw, 0, 1, false);
-  mp_obj_Sha1_t *o = m_new_obj_with_finaliser(mp_obj_Sha1_t);
+  mp_obj_Sha1_t *o = ((mp_obj_Sha1_t *)(m_malloc_with_finaliser(sizeof(mp_obj_Sha1_t))));
   o->base.type = type;
   sha1_Init(&(o->ctx));
   // constructor called with bytes/str as first parameter
@@ -109,9 +109,10 @@ STATIC const mp_rom_map_elem_t mod_trezorcrypto_Sha1_locals_dict_table[] = {
 STATIC MP_DEFINE_CONST_DICT(mod_trezorcrypto_Sha1_locals_dict,
                             mod_trezorcrypto_Sha1_locals_dict_table);
 
-STATIC const mp_obj_type_t mod_trezorcrypto_Sha1_type = {
-    {&mp_type_type},
-    .name = MP_QSTR_Sha1,
-    .make_new = mod_trezorcrypto_Sha1_make_new,
-    .locals_dict = (void *)&mod_trezorcrypto_Sha1_locals_dict,
-};
+static MP_DEFINE_CONST_OBJ_TYPE(
+    mod_trezorcrypto_Sha1_type,
+    MP_QSTR_Sha1,
+    MP_TYPE_FLAG_NONE,
+    make_new, mod_trezorcrypto_Sha1_make_new,
+    locals_dict, &mod_trezorcrypto_Sha1_locals_dict
+);
