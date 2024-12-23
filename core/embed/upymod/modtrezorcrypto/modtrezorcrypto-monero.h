@@ -479,7 +479,7 @@ STATIC mp_obj_t mod_trezorcrypto_monero_encodeint_into(size_t n_args,
     vstr_t out = {0};
     vstr_init_len(&out, 32);
     contract256_modm((uint8_t *)out.buf, MP_OBJ_C_SCALAR(args[1]));
-    return mp_obj_new_str_from_vstr(&mp_type_bytes, &out);
+    return mp_obj_new_str_from_vstr(&out);
   } else {
     mp_buffer_info_t bufm = {0};
     mp_get_buffer_raise(args[0], &bufm, MP_BUFFER_WRITE);

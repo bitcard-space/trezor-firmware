@@ -52,7 +52,7 @@ STATIC mp_obj_t mod_trezorcrypto_bip340_generate_secret() {
       continue;
     break;
   }
-  return mp_obj_new_str_from_vstr(&mp_type_bytes, &sk);
+  return mp_obj_new_str_from_vstr(&sk);
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_0(mod_trezorcrypto_bip340_generate_secret_obj,
                                  mod_trezorcrypto_bip340_generate_secret);
@@ -75,7 +75,7 @@ STATIC mp_obj_t mod_trezorcrypto_bip340_publickey(mp_obj_t secret_key) {
     vstr_clear(&pk);
     mp_raise_ValueError("Invalid secret key");
   }
-  return mp_obj_new_str_from_vstr(&mp_type_bytes, &pk);
+  return mp_obj_new_str_from_vstr(&pk);
 }
 
 STATIC MP_DEFINE_CONST_FUN_OBJ_1(mod_trezorcrypto_bip340_publickey_obj,
@@ -109,7 +109,7 @@ STATIC mp_obj_t mod_trezorcrypto_bip340_sign(mp_obj_t secret_key,
     vstr_clear(&sig);
     mp_raise_ValueError("Signing failed");
   }
-  return mp_obj_new_str_from_vstr(&mp_type_bytes, &sig);
+  return mp_obj_new_str_from_vstr(&sig);
 }
 
 STATIC MP_DEFINE_CONST_FUN_OBJ_2(mod_trezorcrypto_bip340_sign_obj,
@@ -194,7 +194,7 @@ STATIC mp_obj_t mod_trezorcrypto_bip340_tweak_public_key(size_t n_args,
     vstr_clear(&tpk);
     mp_raise_ValueError("Failed to tweak public key");
   }
-  return mp_obj_new_str_from_vstr(&mp_type_bytes, &tpk);
+  return mp_obj_new_str_from_vstr(&tpk);
 }
 
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(
@@ -234,7 +234,7 @@ STATIC mp_obj_t mod_trezorcrypto_bip340_tweak_secret_key(size_t n_args,
     vstr_clear(&tsk);
     mp_raise_ValueError("Failed to tweak secret key");
   }
-  return mp_obj_new_str_from_vstr(&mp_type_bytes, &tsk);
+  return mp_obj_new_str_from_vstr(&tsk);
 }
 
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(
