@@ -1,9 +1,9 @@
 #include "py/builtin.h"
 #include "py/runtime.h"
-#include <trezor_rtl.h>
+// #include <trezor_rtl.h>
 
 #include "modtrezorcrypto-bech32.h"
-
+#include "modtrezorcrypto-bip32.h"
 // info()
 static mp_obj_t py_subsystem_info(void) {
     return MP_OBJ_NEW_SMALL_INT(42);
