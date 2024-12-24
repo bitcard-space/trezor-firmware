@@ -58,7 +58,7 @@ STATIC mp_obj_t mod_trezorcrypto_Pbkdf2_update(mp_obj_t self, mp_obj_t data);
 STATIC mp_obj_t mod_trezorcrypto_Pbkdf2_make_new(const mp_obj_type_t *type,
                                                  size_t n_args, size_t n_kw,
                                                  const mp_obj_t *args) {
-  mp_arg_check_num(n_args, n_kw, 3, 4, false);
+  mp_arg_check_num(n_args, n_kw, 3, 5, false);
 
   mp_buffer_info_t password = {0};
   mp_get_buffer_raise(args[1], &password, MP_BUFFER_READ);
@@ -143,7 +143,7 @@ STATIC mp_obj_t mod_trezorcrypto_Pbkdf2_key(mp_obj_t self) {
   } else {
     mp_raise_ValueError("Invalid PRF");
   }
-  return mp_obj_new_str_from_vstr(&out);
+  return mp_obj_new_bytes_from_vstr(&out);
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_1(mod_trezorcrypto_Pbkdf2_key_obj,
                                  mod_trezorcrypto_Pbkdf2_key);
