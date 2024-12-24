@@ -38,17 +38,17 @@ static void wrapped_ui_wait_callback(uint32_t current, uint32_t total) {
 #include "modtrezorcrypto-sha256.h"
 #include "modtrezorcrypto-sha3-256.h"
 #include "modtrezorcrypto-sha3-512.h"
-// #include "modtrezorcrypto-sha512.h"
-// #include "modtrezorcrypto-shamir.h"
-// #include "modtrezorcrypto-slip39.h"
-// #ifdef USE_OPTIGA
-// #include "modtrezorcrypto-optiga.h"
-// #endif
-// #if !BITCOIN_ONLY
+#include "modtrezorcrypto-sha512.h"
+#include "modtrezorcrypto-shamir.h"
+#include "modtrezorcrypto-slip39.h"
+#ifdef USE_OPTIGA
+#include "modtrezorcrypto-optiga.h"
+#endif
+#if !BITCOIN_ONLY
 // #include "modtrezorcrypto-cardano.h"
 // #include "modtrezorcrypto-monero.h"
 // #include "modtrezorcrypto-nem.h"
-// #endif
+#endif
 
 
 // info()
