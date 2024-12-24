@@ -25,7 +25,7 @@
 #include <string.h>
 
 // 确保 QSTR 定义被包含
-#include "qstrdefs.h"
+// #include "qstrdefs.h"
 
 enum AESMode {
   ECB = 0x00,
@@ -86,7 +86,8 @@ STATIC mp_obj_t mod_trezorcrypto_AES_make_new(const mp_obj_type_t *type,
     }
   }
 
-  mp_obj_AES_t *o = m_new_obj_with_finaliser(mp_obj_AES_t);
+  // mp_obj_AES_t *o = m_new_obj_with_finaliser(mp_obj_AES_t);
+  mp_obj_AES_t *o = ((mp_obj_AES_t *)(m_malloc_with_finaliser(sizeof(mp_obj_AES_t))));
   o->base.type = type;
   o->mode = mode;
   if (iv.len != 0) {
@@ -212,9 +213,10 @@ STATIC const mp_rom_map_elem_t mod_trezorcrypto_AES_locals_dict_table[] = {
 STATIC MP_DEFINE_CONST_DICT(mod_trezorcrypto_AES_locals_dict,
                             mod_trezorcrypto_AES_locals_dict_table);
 
-STATIC const mp_obj_type_t mod_trezorcrypto_AES_type = {
-    {&mp_type_type},
-    .name = MP_QSTR_AES,
-    .make_new = mod_trezorcrypto_AES_make_new,
-    .locals_dict = (void *)&mod_trezorcrypto_AES_locals_dict,
-};
+static MP_DEFINE_CONST_OBJ_TYPE(
+    mod_trezorcrypto_AES_type,          // 类型名称
+    MP_QSTR_AES,                        // Python 中的名称
+    MP_TYPE_FLAG_NONE,                  // 类型标志
+    make_new, mod_trezorcrypto_AES_make_new,  // 构造函数
+    locals_dict, &mod_trezorcrypto_AES_locals_dict  // 局部字典
+);
