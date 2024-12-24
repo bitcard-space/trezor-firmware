@@ -18,6 +18,15 @@
  */
 
 #include "rand.h"
-#include <sec/rng.h>
+// 声明 RP2040 的随机数生成函数
+extern uint8_t rosc_random_u8(size_t cycles);
 
-uint32_t random32(void) { return rng_get(); }
+uint32_t random32(void) {
+    uint32_t r = 0;
+    // 使用 4 次 rosc_random_u8 来生成 32 位随机数
+    r |= ((uint32_t)rosc_random_u8(8)) << 24;
+    r |= ((uint32_t)rosc_random_u8(8)) << 16;
+    r |= ((uint32_t)rosc_random_u8(8)) << 8;
+    r |= ((uint32_t)rosc_random_u8(8));
+    return r;
+}

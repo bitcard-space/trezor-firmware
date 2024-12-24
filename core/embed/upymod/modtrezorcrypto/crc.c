@@ -55,6 +55,7 @@
  * Copyright (C) 1995-1998 Jean-loup Gailly and Mark Adler
  */
 
+#include <stdint.h>
 #include "crc.h"
 
 static const uint32_t crc32tab[16] = {
