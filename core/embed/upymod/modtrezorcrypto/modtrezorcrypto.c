@@ -126,7 +126,7 @@ const mp_obj_module_t mp_module_trezorcrypto = {
     .globals = (mp_obj_dict_t *)&mp_module_trezorcrypto_globals,
 };
 
-MP_REGISTER_MODULE(MP_QSTR_trezorcrypto, mp_module_trezorcrypto);
+MP_REGISTER_MODULE(MP_QSTR_trezor, mp_module_trezorcrypto);
 
 #ifdef USE_SECP256K1_ZKP
 void secp256k1_default_illegal_callback_fn(const char *str, void *data) {
