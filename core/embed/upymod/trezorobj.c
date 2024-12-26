@@ -17,13 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <trezor_rtl.h>
+// #include <trezor_rtl.h>
 
 #include "memzero.h"
 #include "py/obj.h"
 #include "py/objint.h"
 #include "py/objstr.h"
 #include "py/runtime.h"
+#include <string.h>
 
 static bool mpz_as_ll_checked(const mpz_t *i, long long *value) {
   // Analogue of `mpz_as_int_checked` from mpz.c
