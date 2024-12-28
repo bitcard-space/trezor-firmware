@@ -35,11 +35,11 @@ static void wrapped_ui_wait_callback(uint32_t current, uint32_t total) {
 #endif
 #include "modtrezorcrypto-groestl.h"
 #include "modtrezorcrypto-hmac.h"
-// #include "modtrezorcrypto-nist256p1.h"
+#include "modtrezorcrypto-nist256p1.h"
 #include "modtrezorcrypto-pbkdf2.h"
 #include "modtrezorcrypto-random.h"
 #include "modtrezorcrypto-ripemd160.h"
-// #include "modtrezorcrypto-secp256k1.h"
+#include "modtrezorcrypto-secp256k1.h"
 #include "modtrezorcrypto-sha1.h"
 #include "modtrezorcrypto-sha256.h"
 #include "modtrezorcrypto-sha3-256.h"
@@ -88,8 +88,8 @@ STATIC const mp_rom_map_elem_t mp_module_trezorcrypto_globals_table[] = {
 #if !BITCOIN_ONLY
     {MP_ROM_QSTR(MP_QSTR_monero), MP_ROM_PTR(&mod_trezorcrypto_monero_module)},
 #endif
-    // {MP_ROM_QSTR(MP_QSTR_nist256p1),
-    //  MP_ROM_PTR(&mod_trezorcrypto_nist256p1_module)},
+    {MP_ROM_QSTR(MP_QSTR_nist256p1),
+     MP_ROM_PTR(&mod_trezorcrypto_nist256p1_module)},
     {MP_ROM_QSTR(MP_QSTR_groestl512),
      MP_ROM_PTR(&mod_trezorcrypto_Groestl512_type)},
     {MP_ROM_QSTR(MP_QSTR_hmac), MP_ROM_PTR(&mod_trezorcrypto_Hmac_type)},
@@ -100,8 +100,8 @@ STATIC const mp_rom_map_elem_t mp_module_trezorcrypto_globals_table[] = {
     {MP_ROM_QSTR(MP_QSTR_random), MP_ROM_PTR(&mod_trezorcrypto_random_module)},
     {MP_ROM_QSTR(MP_QSTR_ripemd160),
      MP_ROM_PTR(&mod_trezorcrypto_Ripemd160_type)},
-    // {MP_ROM_QSTR(MP_QSTR_secp256k1),
-    //  MP_ROM_PTR(&mod_trezorcrypto_secp256k1_module)},
+    {MP_ROM_QSTR(MP_QSTR_secp256k1),
+     MP_ROM_PTR(&mod_trezorcrypto_secp256k1_module)},
 #if USE_SECP256K1_ZKP
     {MP_ROM_QSTR(MP_QSTR_bip340), MP_ROM_PTR(&mod_trezorcrypto_bip340_module)},
 #endif

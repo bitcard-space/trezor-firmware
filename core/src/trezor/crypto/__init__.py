@@ -1,5 +1,5 @@
 from trezorcrypto import (  # noqa: F401
-    aes,
+    # aes,
     bip32,
     bip39,
     chacha20poly1305,
@@ -10,17 +10,22 @@ from trezorcrypto import (  # noqa: F401
 )
 
 try:
+    from trezorcrypto import aes  # noqa: F401
+except Exception:
+    pass
+
+try:
     from trezorcrypto import aesgcm  # noqa: F401
 except Exception:
     pass
 
-from trezor import utils
+# from trezor import utils
 
-if not utils.BITCOIN_ONLY:
-    from trezorcrypto import cardano, monero, nem  # noqa: F401
+# if not utils.BITCOIN_ONLY:
+#     from trezorcrypto import cardano, monero, nem  # noqa: F401
 
-if utils.USE_OPTIGA:
-    from trezorcrypto import optiga  # noqa: F401
+# if utils.USE_OPTIGA:
+#     from trezorcrypto import optiga  # noqa: F401
 
-if utils.USE_THP:
-    from trezorcrypto import elligator2  # noqa: F401
+# if utils.USE_THP:
+#     from trezorcrypto import elligator2  # noqa: F401

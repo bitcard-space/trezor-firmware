@@ -1,20 +1,4 @@
 from micropython import const
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-    from trezor.utils import Writer
-
-    # The intention below is basically:
-    # RLPItem = int | bytes | list[RLPItem]
-    # That will not typecheck though. Type `list` is invariant in its parameter, meaning
-    # that we cannot pass list[bytes] into a list[RLPItem] parameter (what if the
-    # function wanted to append an int?). We do want to enforce that it's a `list`, not
-    # a generic `Sequence` (because we do isinstance checks for a list). We are however
-    # only reading from the list and passing into things that consume a RLPItem. Hence
-    # we have to enumerate single-type lists as well as the universal list[RLPItem].
-    RLPList = list[int] | list[bytes] | list["RLPItem"]
-    RLPItem = RLPList | bytes | int
-
 
 STRING_HEADER_BYTE = const(0x80)
 LIST_HEADER_BYTE = const(0xC0)

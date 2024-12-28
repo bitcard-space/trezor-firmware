@@ -32,17 +32,11 @@ See https://github.com/satoshilabs/slips/blob/master/slip-0039.md.
 
 from micropython import const
 from trezorcrypto import shamir, slip39
-from typing import TYPE_CHECKING
 
-from trezor.crypto import random
-from trezor.errors import MnemonicError
-
-if TYPE_CHECKING:
-    from typing import Callable, Collection, Iterable
-
-    Indices = tuple[int, ...]
-    MnemonicGroups = dict[int, tuple[int, set[tuple[int, bytes]]]]
-
+from trezorcrypto import random
+# from trezor.errors import MnemonicError
+class MnemonicError(RuntimeError):
+    pass
 
 # === Simple helpers ===
 

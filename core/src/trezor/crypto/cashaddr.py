@@ -22,7 +22,7 @@
 
 from micropython import const
 
-from .bech32 import convertbits
+from bech32 import convertbits
 
 CHARSET = "qpzry9x8gf2tvdw0s3jn54khce6mua7l"
 ADDRESS_TYPE_P2KH = const(0)

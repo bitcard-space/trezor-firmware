@@ -13,8 +13,6 @@
 # This module adds shiny packaging and support for python3.
 #
 
-from typing import Callable
-
 # 58 character alphabet used
 _alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
 
@@ -91,7 +89,7 @@ def ripemd160_32(data: bytes) -> bytes:
     return ripemd160(data).digest()[:4]
 
 
-def encode_check(data: bytes, digestfunc: Callable[[bytes], bytes] = sha256d_32) -> str:
+def encode_check(data: bytes, digestfunc) -> str:
     """
     Convert bytes to base58 encoded string, append checksum.
     """
@@ -99,7 +97,7 @@ def encode_check(data: bytes, digestfunc: Callable[[bytes], bytes] = sha256d_32)
 
 
 def decode_check(
-    string: str, digestfunc: Callable[[bytes], bytes] = sha256d_32
+    string: str, digestfunc
 ) -> bytes:
     """
     Convert base58 encoded string to bytes and verify checksum.
@@ -108,7 +106,7 @@ def decode_check(
     return verify_checksum(result, digestfunc)
 
 
-def verify_checksum(data: bytes, digestfunc: Callable[[bytes], bytes]) -> bytes:
+def verify_checksum(data: bytes, digestfunc) -> bytes:
     digestlen = len(digestfunc(b""))
     result, check = data[:-digestlen], data[-digestlen:]
 

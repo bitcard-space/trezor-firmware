@@ -22,26 +22,11 @@
 
 from micropython import const
 from trezorcrypto import bech32
-from typing import TYPE_CHECKING
 
 bech32_decode = bech32.decode  # reexported
 
 
-if TYPE_CHECKING:
-    from enum import IntEnum
-    from typing import Sequence, TypeVar
-
-    A = TypeVar("A")
-    B = TypeVar("B")
-    C = TypeVar("C")
-    # usage: OptionalTuple[int, list[int]] is either (None, None) or (someint, somelist)
-    # but not (None, somelist)
-    OptionalTuple2 = tuple[None, None] | tuple[A, B]
-else:
-    IntEnum = object
-
-
-class Encoding(IntEnum):
+class Encoding():
     """Enumeration type to list the various supported encodings."""
 
     BECH32 = const(1)
