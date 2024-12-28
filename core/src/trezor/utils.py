@@ -1,51 +1,51 @@
 import gc
 import sys
-from trezorutils import (  # noqa: F401
-    BITCOIN_ONLY,
-    EMULATOR,
-    INTERNAL_MODEL,
-    MODEL,
-    MODEL_FULL_NAME,
-    MODEL_USB_MANUFACTURER,
-    MODEL_USB_PRODUCT,
-    SCM_REVISION,
-    UI_LAYOUT,
-    USE_BACKLIGHT,
-    USE_BUTTON,
-    USE_HAPTIC,
-    USE_OPTIGA,
-    USE_SD_CARD,
-    USE_THP,
-    USE_TOUCH,
-    VERSION,
-    bootloader_locked,
-    check_firmware_header,
-    consteq,
-    firmware_hash,
-    firmware_vendor,
-    halt,
-    memcpy,
-    reboot_to_bootloader,
-    sd_hotswap_enabled,
-    unit_btconly,
-    unit_color,
-    unit_packaging,
-)
-from typing import TYPE_CHECKING
+# from trezorutils import (  # noqa: F401
+#     BITCOIN_ONLY,
+#     EMULATOR,
+#     INTERNAL_MODEL,
+#     MODEL,
+#     MODEL_FULL_NAME,
+#     MODEL_USB_MANUFACTURER,
+#     MODEL_USB_PRODUCT,
+#     SCM_REVISION,
+#     UI_LAYOUT,
+#     USE_BACKLIGHT,
+#     USE_BUTTON,
+#     USE_HAPTIC,
+#     USE_OPTIGA,
+#     USE_SD_CARD,
+#     USE_THP,
+#     USE_TOUCH,
+#     VERSION,
+#     bootloader_locked,
+#     check_firmware_header,
+#     consteq,
+#     firmware_hash,
+#     firmware_vendor,
+#     halt,
+#     memcpy,
+#     reboot_to_bootloader,
+#     sd_hotswap_enabled,
+#     unit_btconly,
+#     unit_color,
+#     unit_packaging,
+# )
+from trezor.typing import TYPE_CHECKING
 
-if __debug__:
-    if EMULATOR:
-        import uos
+# if __debug__:
+#     if EMULATOR:
+#         import uos
 
-        DISABLE_ANIMATION = uos.getenv("TREZOR_DISABLE_ANIMATION") == "1"
-        LOG_MEMORY = uos.getenv("TREZOR_LOG_MEMORY") == "1"
-    else:
-        from trezorutils import DISABLE_ANIMATION  # noqa: F401
+#         DISABLE_ANIMATION = uos.getenv("TREZOR_DISABLE_ANIMATION") == "1"
+#         LOG_MEMORY = uos.getenv("TREZOR_LOG_MEMORY") == "1"
+#     else:
+#         from trezorutils import DISABLE_ANIMATION  # noqa: F401
 
-        LOG_MEMORY = 0
+#         LOG_MEMORY = 0
 
-else:
-    DISABLE_ANIMATION = False
+# else:
+#     DISABLE_ANIMATION = False
 
 if TYPE_CHECKING:
     from typing import Any, Iterator, Protocol, Sequence, TypeVar

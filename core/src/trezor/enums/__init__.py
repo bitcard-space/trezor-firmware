@@ -2,7 +2,7 @@
 # fmt: off
 # isort:skip_file
 
-from typing import TYPE_CHECKING
+from trezor.typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from enum import IntEnum

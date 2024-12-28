@@ -1,7 +1,7 @@
 # flake8: noqa: F403,F405
-from common import *  # isort:skip
+from trezor.tests.common import *  # isort:skip
 
-from trezor.crypto import bip32
+from trezorcrypto import bip32
 
 SECP256K1_NAME = "secp256k1"
 HARDENED = 0x80000000

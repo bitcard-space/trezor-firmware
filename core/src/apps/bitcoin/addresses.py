@@ -1,21 +1,21 @@
-from typing import TYPE_CHECKING
+from trezor.typing import TYPE_CHECKING
 
 from trezor.crypto import base58
 from trezor.crypto.hashlib import sha256
 from trezor.utils import HashWriter
-from trezor.wire import ProcessError
+from trezor.errors import ProcessError
 
-from apps.common import address_type
+from trezor.apps.common import address_type
 
-from .common import ecdsa_hash_pubkey, encode_bech32_address
-from .scripts import output_script_native_segwit, write_output_script_multisig
+from trezor.apps.bitcoin.common import ecdsa_hash_pubkey, encode_bech32_address
+from trezor.apps.bitcoin.scripts import output_script_native_segwit, write_output_script_multisig
 
 if TYPE_CHECKING:
     from trezor.crypto import bip32
     from trezor.enums import InputScriptType
     from trezor.messages import MultisigRedeemScriptType
 
-    from apps.common.coininfo import CoinInfo
+    from trezor.apps.common.coininfo import CoinInfo
 
 
 def get_address(

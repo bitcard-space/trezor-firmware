@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING
+from trezor.typing import TYPE_CHECKING
 
 import trezorproto
 

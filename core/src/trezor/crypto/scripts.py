@@ -1,4 +1,4 @@
-from thashlib import blake256, ripemd160, sha256
+from .hashlib import blake256, ripemd160, sha256
 
 
 class sha256_ripemd160(sha256):

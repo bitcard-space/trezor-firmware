@@ -24,7 +24,7 @@ reads the message's header. When the message type is known the first handler is 
 """
 
 from micropython import const
-from typing import TYPE_CHECKING
+from trezor.typing import TYPE_CHECKING
 
 from trezor import log, loop, protobuf, utils
 

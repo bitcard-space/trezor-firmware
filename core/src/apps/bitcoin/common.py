@@ -1,12 +1,21 @@
 from micropython import const
-from typing import TYPE_CHECKING
+from trezor.typing import TYPE_CHECKING
 
-from trezor import wire
+from trezor import errors as wire
 from trezor.crypto import bech32
-from trezor.crypto.curve import bip340
+try:
+    from trezor.crypto.curve import bip340
+except Exception:
+    # from trezorcrypto import bip340
+    pass
 from trezor.enums import InputScriptType, OutputScriptType
 from trezor.messages import MultisigRedeemScriptType
-
+# luyh@luyhdeMac-mini bitcard-pico % mpremote mount . run trezor/apps/bitcoin/addresses.py
+# Local directory . is mounted at /remote
+# Traceback (most recent call last):
+#   File "<stdin>", line 10, in <module>
+#   File "trezor/apps/bitcoin/common.py", line 12, in <module>
+# MemoryError: memory allocation failed, allocating 136 bytes
 if TYPE_CHECKING:
     from enum import IntEnum
 

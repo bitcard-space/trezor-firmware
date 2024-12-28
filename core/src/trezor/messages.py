@@ -4,7 +4,7 @@
 
 from trezor import protobuf
 
-from typing import Any, TYPE_CHECKING
+from trezor.typing import Any, TYPE_CHECKING
 
 
 def __getattr__(name: str) -> Any:

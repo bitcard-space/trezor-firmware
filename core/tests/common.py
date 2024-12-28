@@ -2,13 +2,13 @@ import sys
 
 sys.path.append("../src")
 
-import unittest  # noqa: F401
-from typing import Any, Awaitable
+from trezor.tests import unittest  # noqa: F401
+from trezor.typing import Any, Awaitable
 from ubinascii import hexlify, unhexlify  # noqa: F401
 
 from trezor import utils  # noqa: F401
 
-from apps.common.paths import HARDENED
+from trezor.apps.common.paths import HARDENED
 
 
 def H_(x: int) -> int:

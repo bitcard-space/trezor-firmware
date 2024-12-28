@@ -1,5 +1,5 @@
 from micropython import const
-from typing import TYPE_CHECKING
+from trezor.typing import TYPE_CHECKING
 
 HARDENED = const(0x8000_0000)
 SLIP25_PURPOSE = const(10025 | HARDENED)
