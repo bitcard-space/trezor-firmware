@@ -138,7 +138,7 @@ STATIC mp_obj_t mod_trezorcrypto_Blake2b_digest(mp_obj_t self) {
   vstr_t hash = {0};
   vstr_init_len(&hash, ctx.outlen);
   blake2b_Final(&ctx, (uint8_t *)hash.buf, hash.len);
-  memzeromp_obj_new_bytes_from_vstrX));
+  memzero(&ctx, sizeof(BLAKE2B_CTX));
   return mp_obj_new_str_from_vstr(&hash);
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_1(mod_trezorcrypto_Blake2b_digest_obj,
