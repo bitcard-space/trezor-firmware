@@ -18,6 +18,7 @@ from apps.bitcoin.addresses import (
 )
 from apps.bitcoin.keychain import validate_path_against_script_type
 from apps.bitcoin.writers import *
+from binascii import unhexlify
 
 class GetAddress():
     address_n: "list[int]"
@@ -54,7 +55,7 @@ def node_derive(root, path):
 class TestAddress(unittest.TestCase):
     # pylint: disable=C0301
 
-    def test_p2wpkh_in_p2sh_address(self):
+    def test_p2wpkh_in_p2sh_tn(self):
         coin = coins.by_name("Testnet")
         address = address_p2wpkh_in_p2sh(
             unhexlify(
@@ -64,7 +65,18 @@ class TestAddress(unittest.TestCase):
         )
         self.assertEqual(address, "2Mww8dCYPUpKHofjgcXcBCEGmniw9CoaiD2")
 
-    def test_p2wpkh_in_p2sh_node_derive_address(self):
+
+    def test_p2wpkh_in_p2sh_btc(self):
+        coin = coins.by_name("Bitcoin")
+        address = address_p2wpkh_in_p2sh(
+            unhexlify(
+                "03a6fafbb37b81ddcb82f1b19035c1d5cb490bc550bbc68cbf7d210357701f1714"
+            ),
+            coin,
+        )
+        self.assertEqual(address, "3N9o5o9vskcLme3CYBu2H8c97i3DWPDoqg")
+
+    def test_p2wpkh_in_p2sh_node_derive_tn(self):
         coin = coins.by_name("Testnet")
         seed = bip39.seed(" ".join(["all"] * 12), "")
         root = bip32.from_seed(seed, "secp256k1")
@@ -84,7 +96,23 @@ class TestAddress(unittest.TestCase):
 
         self.assertEqual(address, "2N4Q5FhU2497BryFfUgbqkAJE87aKHUhXMp")
 
-    def test_p2wpkh_address(self):
+    def test_p2wpkh_in_p2sh_node_derive_btc(self):
+        coin = coins.by_name("Bitcoin")
+        seed = bip39.seed(" ".join(["all"] * 12), "")
+        root = bip32.from_seed(seed, "secp256k1")
+
+        node = node_derive(root, [H_(49), H_(0), H_(0), 0, 0])
+        address = address_p2wpkh_in_p2sh(node.public_key(), coin)
+
+        self.assertEqual(address, "3L6TyTisPBmrDAj6RoKmDzNnj4eQi54gD2")
+
+        node = node_derive(root, [H_(49), H_(0), H_(0), 1, 1])
+        address = address_p2wpkh_in_p2sh(node.public_key(), coin)
+
+        self.assertEqual(address, "33nnWkqcLEQAmafj9LwKxNqypPWssrNWfB")
+
+
+    def test_p2wpkh_tn(self):
         # test data from https://bc-2.jp/tools/bech32demo/index.html
         coin = coins.by_name("Testnet")
         address = address_p2wpkh(
@@ -95,7 +123,30 @@ class TestAddress(unittest.TestCase):
         )
         self.assertEqual(address, "tb1qw508d6qejxtdg4y5r3zarvary0c5xw7kxpjzsx")
 
-    def test_p2sh_address(self):
+    
+    def test_p2wpkh_btc(self):
+        # test data from https://bc-2.jp/tools/bech32demo/index.html
+        coin = coins.by_name("Bitcoin")
+        address = address_p2wpkh(
+            unhexlify(
+                "03d2109d69cd90326cc77f1efa49d08035ae15342b777eb343b6486ad87a27ca4e"
+            ),
+            coin,
+        )
+        self.assertEqual(address, "bc1qa9t300t9spvy8ltyef6dnu0ktzgpsraa2dscx8")
+
+    def test_p2wpkh_btc_node_derive_btc(self):
+        coin = coins.by_name("Bitcoin")
+        seed = bip39.seed(" ".join(["all"] * 12), "")
+        root = bip32.from_seed(seed, "secp256k1")
+
+        node = node_derive(root, [H_(84),H_(0),H_(0),0,0])
+        address = address_p2wpkh(node.public_key(), coin)
+
+        self.assertEqual(address, "bc1qannfxke2tfd4l7vhepehpvt05y83v3qsf6nfkk")
+
+
+    def test_p2sh_tn(self):
         coin = coins.by_name("Testnet")
 
         address = address_p2sh(
@@ -103,7 +154,15 @@ class TestAddress(unittest.TestCase):
         )
         self.assertEqual(address, "2N4Q5FhU2497BryFfUgbqkAJE87aKHUhXMp")
 
-    def test_p2wsh_address(self):
+    def test_pkh_btc(self):
+        coin = coins.by_name("Bitcoin")
+
+        address = address_pkh(
+            unhexlify("03c6d9cc725bb7e19c026df03bf693ee1171371a8eaf25f04b7a58f6befabcd38c"), coin
+        )
+        self.assertEqual(address, "1JAd7XCBzGudGpJQSDSfpmJhiygtLQWaGL")
+
+    def test_p2wsh_tn(self):
         coin = coins.by_name("Testnet")
 
         # pubkey OP_CHECKSIG
@@ -118,6 +177,22 @@ class TestAddress(unittest.TestCase):
             address, "tb1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3q0sl5k7"
         )
 
+    @unittest.skip("test_p2wsh_btc")
+    def test_p2wsh_btc(self):
+        coin = coins.by_name("Bitcoin")
+
+        # pubkey OP_CHECKSIG
+        script = unhexlify(
+            "03d2109d69cd90326cc77f1efa49d08035ae15342b777eb343b6486ad87a27ca4e"
+        )
+        h = HashWriter(sha256())
+        write_bytes_unchecked(h, script)
+
+        address = _address_p2wsh(h.get_digest(), coin.bech32_prefix)
+        self.assertEqual(
+            address, "bc1q0rmlp33v99e22dack5cvkvjgpdp3xdm5ljxm0yca7y3t77zerezqsqd8j8"
+        )
+
     def test_p2wsh_in_p2sh_address(self):
         coin = coins.by_name("Bitcoin")
 
@@ -129,6 +204,24 @@ class TestAddress(unittest.TestCase):
             coin,
         )
         self.assertEqual(address, "3Dwz1MXhM6EfFoJChHCxh1jWHb8GQqRenG")
+        
+
+    @unittest.skip("test_p2wsh_in_p2sh_node_derive_btc")
+    def test_p2wsh_in_p2sh_node_derive_btc(self):
+        coin = coins.by_name("Bitcoin")
+        seed = bip39.seed(" ".join(["all"] * 12), "")
+        root = bip32.from_seed(seed, "secp256k1")
+
+        node = node_derive(root, [0,0])
+        address = address_p2wpkh_in_p2sh(node.public_key(), coin)
+
+        self.assertEqual(address, "3JuVD9jMU9EySERzsBW1SjeKZF87nKLzE3")
+
+        node = node_derive(root, [H_(1), 0])
+        address = address_p2wpkh_in_p2sh(node.public_key(), coin)
+
+        self.assertEqual(address, "3MuV3xZ1WMen1cwJcUrX1hu8Y8vMXfvQPJ")
+
 
     def test_multisig_address_p2sh(self):
         # # test data from
