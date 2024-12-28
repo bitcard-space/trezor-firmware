@@ -1,9 +1,9 @@
-from typing import TYPE_CHECKING
+from trezor.typing import TYPE_CHECKING
 
 from trezor import utils
 from trezor.enums import InputScriptType
 from trezor.utils import BufferReader, empty_bytearray
-from trezor.wire import DataError
+from trezor.errors import DataError
 
 from apps.common.readers import read_compact_size
 from apps.common.writers import write_compact_size

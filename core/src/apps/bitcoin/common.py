@@ -9,7 +9,7 @@ except Exception:
     # from trezorcrypto import bip340
     pass
 from trezor.enums import InputScriptType, OutputScriptType
-from trezor.messages import MultisigRedeemScriptType
+# from trezor.messages import MultisigRedeemScriptType
 # luyh@luyhdeMac-mini bitcard-pico % mpremote mount . run trezor/apps/bitcoin/addresses.py
 # Local directory . is mounted at /remote
 # Traceback (most recent call last):

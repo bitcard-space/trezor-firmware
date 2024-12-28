@@ -2,7 +2,7 @@
 # fmt: off
 # isort:skip_file
 
-from trezor import protobuf
+# from trezor import protobuf
 
 from trezor.typing import Any, TYPE_CHECKING
 

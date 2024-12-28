@@ -1,7 +1,7 @@
-from typing import TYPE_CHECKING
+from trezor.typing import TYPE_CHECKING
 
-import storage.device as storage_device
-from storage.cache_common import APP_COMMON_SEED, APP_COMMON_SEED_WITHOUT_PASSPHRASE
+# import storage.device as storage_device
+# from storage.cache_common import APP_COMMON_SEED, APP_COMMON_SEED_WITHOUT_PASSPHRASE
 from trezor import utils
 from trezor.crypto import hmac
 from trezor.wire import context

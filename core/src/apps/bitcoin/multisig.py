@@ -1,7 +1,7 @@
-from typing import TYPE_CHECKING
+from trezor.typing import TYPE_CHECKING
 
 from trezor.enums import MultisigPubkeysOrder
-from trezor.wire import DataError
+from trezor.errors import DataError
 
 if TYPE_CHECKING:
     from trezor.messages import HDNodeType, MultisigRedeemScriptType

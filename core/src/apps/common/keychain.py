@@ -1,9 +1,9 @@
-from typing import TYPE_CHECKING
+from trezor.typing import TYPE_CHECKING
 
 from trezor.crypto import bip32
-from trezor.wire import DataError
+from trezor.errors import DataError
 
-from . import paths, safety_checks
+# from . import paths, safety_checks
 
 if TYPE_CHECKING:
     from typing import Any, Awaitable, Callable, Iterable, TypeVar

@@ -1,5 +1,6 @@
 import gc
 import sys
+BITCOIN_ONLY=1
 # from trezorutils import (  # noqa: F401
 #     BITCOIN_ONLY,
 #     EMULATOR,
