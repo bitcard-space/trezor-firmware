@@ -1,5 +1,5 @@
 # flake8: noqa: F403,F405
-from common import *  # isort:skip
+from trezor.tests.common import *  # isort:skip
 
 from trezor.crypto import base58
 from trezor.crypto.hashlib import ripemd160

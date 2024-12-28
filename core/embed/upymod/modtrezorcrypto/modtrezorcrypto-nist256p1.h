@@ -50,7 +50,7 @@ STATIC mp_obj_t mod_trezorcrypto_nist256p1_generate_secret() {
       continue;
     break;
   }
-  return mp_obj_new_str_from_vstr(&sk);
+  return mp_obj_new_bytes_from_vstr(&sk);
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_0(mod_trezorcrypto_nist256p1_generate_secret_obj,
                                  mod_trezorcrypto_nist256p1_generate_secret);
@@ -81,7 +81,7 @@ STATIC mp_obj_t mod_trezorcrypto_nist256p1_publickey(size_t n_args,
       mp_raise_ValueError("Invalid secret key");
     }
   }
-  return mp_obj_new_str_from_vstr(&pk);
+  return mp_obj_new_bytes_from_vstr(&pk);
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(
     mod_trezorcrypto_nist256p1_publickey_obj, 1, 2,
@@ -116,7 +116,7 @@ STATIC mp_obj_t mod_trezorcrypto_nist256p1_sign(size_t n_args,
     mp_raise_ValueError("Signing failed");
   }
   sig.buf[0] = 27 + pby + compressed * 4;
-  return mp_obj_new_str_from_vstr(&sig);
+  return mp_obj_new_bytes_from_vstr(&sig);
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(mod_trezorcrypto_nist256p1_sign_obj,
                                            2, 3,
@@ -183,7 +183,7 @@ STATIC mp_obj_t mod_trezorcrypto_nist256p1_verify_recover(mp_obj_t signature,
       pk.buf[0] = 0x02 | (pk.buf[64] & 1);
       pk.len = 33;
     }
-    return mp_obj_new_str_from_vstr(&pk);
+    return mp_obj_new_bytes_from_vstr(&pk);
   } else {
     return mp_const_none;
   }
@@ -214,7 +214,7 @@ STATIC mp_obj_t mod_trezorcrypto_nist256p1_multiply(mp_obj_t secret_key,
     vstr_clear(&out);
     mp_raise_ValueError("Multiply failed");
   }
-  return mp_obj_new_str_from_vstr(&out);
+  return mp_obj_new_bytes_from_vstr(&out);
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_2(mod_trezorcrypto_nist256p1_multiply_obj,
                                  mod_trezorcrypto_nist256p1_multiply);
