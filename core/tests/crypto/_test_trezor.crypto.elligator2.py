@@ -1,5 +1,5 @@
 # flake8: noqa: F403,F405
-from common import *
+from tests.trezor.common import *
 
 if utils.USE_THP:
     from trezor.crypto import elligator2

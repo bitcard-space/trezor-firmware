@@ -22,7 +22,7 @@
 """Reference tests for cashaddr adresses"""
 
 # flake8: noqa: F403,F405
-from common import *  # isort:skip
+from tests.trezor.common import *  # isort:skip
 
 from trezor.crypto import base58, cashaddr
 

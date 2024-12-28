@@ -170,5 +170,5 @@ static MP_DEFINE_CONST_OBJ_TYPE(
     MP_QSTR_ChaCha20Poly1305,
     MP_TYPE_FLAG_NONE,
     make_new, mod_trezorcrypto_ChaCha20Poly1305_make_new,
-    locals_dict, &mod_trezorcrypto_Blake256_locals_dict
+    locals_dict, &mod_trezorcrypto_ChaCha20Poly1305_locals_dict
     );

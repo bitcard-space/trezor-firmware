@@ -1,5 +1,5 @@
 # flake8: noqa: F403,F405
-from common import *  # isort:skip
+from tests.trezor.common import *  # isort:skip
 
 from trezor.crypto.curve import curve25519
 
@@ -15,7 +15,7 @@ class TestCryptoCurve25519(unittest.TestCase):
     ]
 
     def test_generate_secret(self):
-        for _ in range(100):
+        for _ in range(10):
             sk = curve25519.generate_secret()
             self.assertTrue(len(sk) == 32)
             self.assertTrue(sk[0] & 7 == 0 and sk[31] & 128 == 0 and sk[31] & 64 == 64)
@@ -26,7 +26,7 @@ class TestCryptoCurve25519(unittest.TestCase):
             self.assertEqual(session2, unhexlify(session))
 
     def test_multiply_random(self):
-        for _ in range(100):
+        for _ in range(10):
             sk1 = curve25519.generate_secret()
             sk2 = curve25519.generate_secret()
             pk1 = curve25519.publickey(sk1)

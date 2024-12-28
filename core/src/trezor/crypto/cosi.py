@@ -1,4 +1,4 @@
-from curve import ed25519
+from trezor.crypto.curve import ed25519
 
 commit = ed25519.cosi_commit
 sign = ed25519.cosi_sign

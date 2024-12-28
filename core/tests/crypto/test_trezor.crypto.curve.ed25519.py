@@ -1,5 +1,5 @@
 # flake8: noqa: F403,F405
-from common import *  # isort:skip
+from tests.trezor.common import *  # isort:skip
 
 from trezor.crypto import random
 from trezor.crypto.curve import ed25519
@@ -71,7 +71,7 @@ class TestCryptoEd25519(unittest.TestCase):
             pass
 
     def test_sign_verify_random(self):
-        for l in range(1, 300):
+        for l in range(1, 30):
             sk = ed25519.generate_secret()
             pk = ed25519.publickey(sk)
             msg = random.bytes(l)

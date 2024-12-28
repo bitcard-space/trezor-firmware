@@ -1,5 +1,5 @@
 # flake8: noqa: F403,F405
-from trezor.tests.common import *  # isort:skip
+from tests.trezor.common import *  # isort:skip
 
 from trezorcrypto import bip32
 

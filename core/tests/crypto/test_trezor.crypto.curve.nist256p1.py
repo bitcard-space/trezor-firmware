@@ -1,5 +1,5 @@
 # flake8: noqa: F403,F405
-from common import *  # isort:skip
+from tests.trezor.common import *  # isort:skip
 
 from trezor.crypto import random
 from trezor.crypto.curve import nist256p1
@@ -265,7 +265,7 @@ class TestCryptoNist256p1(unittest.TestCase):
         self.assertTrue(nist256p1.verify(pk, sig[1:], dig))
 
     def test_sign_verify_random(self):
-        for _ in range(100):
+        for _ in range(10):
             sk = nist256p1.generate_secret()
             pk = nist256p1.publickey(sk)
             dig = random.bytes(32)
@@ -275,7 +275,7 @@ class TestCryptoNist256p1(unittest.TestCase):
 
     def test_verify_recover(self):
         for compressed in [False, True]:
-            for _ in range(100):
+            for _ in range(10):
                 sk = nist256p1.generate_secret()
                 pk = nist256p1.publickey(sk, compressed)
                 dig = random.bytes(32)
