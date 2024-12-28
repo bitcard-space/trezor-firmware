@@ -1,9 +1,9 @@
 # flake8: noqa: F403,F405
-from trezor.tests.common import *  # isort:skip
+from tests.trezor.common import *  # isort:skip
 
 from trezor.crypto import base58
 from trezor.crypto.hashlib import ripemd160
-
+from binascii import unhexlify
 
 def digestfunc_graphene(x):
     return ripemd160(x).digest()[:4]

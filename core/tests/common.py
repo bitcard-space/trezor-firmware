@@ -2,7 +2,7 @@ import sys
 
 sys.path.append("../src")
 
-from trezor.tests import unittest  # noqa: F401
+from tests.trezor import unittest  # noqa: F401
 from trezor.typing import Any, Awaitable
 from ubinascii import hexlify, unhexlify  # noqa: F401
 

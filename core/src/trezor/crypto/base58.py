@@ -89,7 +89,7 @@ def ripemd160_32(data: bytes) -> bytes:
     return ripemd160(data).digest()[:4]
 
 
-def encode_check(data: bytes, digestfunc) -> str:
+def encode_check(data: bytes, digestfunc = sha256d_32) -> str:
     """
     Convert bytes to base58 encoded string, append checksum.
     """
@@ -97,7 +97,7 @@ def encode_check(data: bytes, digestfunc) -> str:
 
 
 def decode_check(
-    string: str, digestfunc
+    string: str, digestfunc = sha256d_32
 ) -> bytes:
     """
     Convert base58 encoded string to bytes and verify checksum.
