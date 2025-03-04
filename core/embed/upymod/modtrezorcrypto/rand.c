@@ -17,8 +17,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "rand.h"
 #include "pico/rand.h"
+// #include "py/runtime.h"
 
 uint32_t random32(void) {
+    // 使用 MicroPython 的调试输出
+    // mp_printf(&mp_plat_print, "test random32\n");
     return get_rand_32();
 }
