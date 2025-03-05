@@ -21,7 +21,7 @@
 """Reference tests for segwit adresses"""
 
 # flake8: noqa: F403,F405
-from tests.trezor.common import *  # isort:skip
+from tests._trezor.common import *  # isort:skip
 
 from trezor.crypto import bech32
 
