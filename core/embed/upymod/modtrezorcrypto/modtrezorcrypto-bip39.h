@@ -111,6 +111,37 @@ STATIC mp_obj_t mod_trezorcrypto_bip39_seed(size_t n_args,
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(mod_trezorcrypto_bip39_seed_obj, 2,
                                            3, mod_trezorcrypto_bip39_seed);
 
+/// def find_candidates(prefix: str, nmax: int) -> List[str]:
+///     """
+///     Find candidates for the given prefix and return up to nmax words.
+///     """
+STATIC mp_obj_t mod_trezorcrypto_bip39_find_candidates(size_t n_args, const mp_obj_t *args) {
+    mp_buffer_info_t prefix_buf = {0};
+    mp_get_buffer_raise(args[0], &prefix_buf, MP_BUFFER_READ);
+    int nmax = mp_obj_get_int(args[1]);
+
+    mp_obj_list_t *candidates_list = mp_obj_new_list(0, NULL);
+    const char *matched_word = mnemonic_complete_word((const char *)prefix_buf.buf, prefix_buf.len);
+    
+    if (matched_word) {
+        // Add the matched word to the candidates list
+        mp_obj_list_append(candidates_list, mp_obj_new_str(matched_word, strlen(matched_word)));
+        // Find and add up to nmax subsequent words
+        int word_index = mnemonic_find_word(matched_word);
+        for (int i = 1; i < nmax; i++) {
+            const char *next_word = mnemonic_get_word(word_index + i);
+            if (next_word) {
+                mp_obj_list_append(candidates_list, mp_obj_new_str(next_word, strlen(next_word)));
+            } else {
+                break; // No more words available
+            }
+        }
+    }
+
+    return MP_OBJ_FROM_PTR(candidates_list);
+}
+STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(mod_trezorcrypto_bip39_find_candidates_obj, 2, 2, mod_trezorcrypto_bip39_find_candidates);
+
 STATIC const mp_rom_map_elem_t mod_trezorcrypto_bip39_globals_table[] = {
     {MP_ROM_QSTR(MP_QSTR___name__), MP_ROM_QSTR(MP_QSTR_bip39)},
     {MP_ROM_QSTR(MP_QSTR_generate),
@@ -119,6 +150,7 @@ STATIC const mp_rom_map_elem_t mod_trezorcrypto_bip39_globals_table[] = {
      MP_ROM_PTR(&mod_trezorcrypto_bip39_from_data_obj)},
     {MP_ROM_QSTR(MP_QSTR_check), MP_ROM_PTR(&mod_trezorcrypto_bip39_check_obj)},
     {MP_ROM_QSTR(MP_QSTR_seed), MP_ROM_PTR(&mod_trezorcrypto_bip39_seed_obj)},
+    {MP_ROM_QSTR(MP_QSTR_find_candidates), MP_ROM_PTR(&mod_trezorcrypto_bip39_find_candidates_obj)},
 };
 STATIC MP_DEFINE_CONST_DICT(mod_trezorcrypto_bip39_globals,
                             mod_trezorcrypto_bip39_globals_table);
